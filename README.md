@@ -2,4 +2,10 @@
 
 npm i
 
-npm i npmstart
+npm start
+
+
+Возможны проблемы с зависимостями - на такой случай прикладываю архив, с выкачанными node_modules
+https://disk.yandex.ru/d/Oy7sEPm4N2zMUQ
+Его достаточно распаковать и сделать 
+npm start
