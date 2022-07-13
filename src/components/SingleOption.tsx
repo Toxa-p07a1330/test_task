@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-import {option} from "../types";
+import {context, option} from "../types";
 import {closeAllDropdowns} from "../utils/utils";
 import {DropDownContext} from "../context/DropDownContext";
 let SingleOption = (props: {option: option})=>{
-    const dropDownContext = useContext(DropDownContext)
+    const dropDownContext = useContext<context>(DropDownContext)
     return <div className={"dropdown_unit"} onClick={()=>{
         eval(props.option.action);
         closeAllDropdowns(dropDownContext)

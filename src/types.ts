@@ -20,9 +20,4 @@ export type option = {
     icon: string
 }
 
-export type boundRect = {
-    top: number,
-    left: number,
-    bottom: number,
-    right: number
-}
+export type boundRect = ClientRect | DOMRect

@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {DropDownContext} from "../context/DropDownContext";
-import {boundRect, option, options} from "../types";
+import {boundRect, context, option, options} from "../types";
 import SingleOption from "./SingleOption";
 
 let DropDownMenuWrapper = (props: {id: number})=>{
 
-    const dropDownContext = useContext(DropDownContext)
+    const triggerSize:number = 40
+    const dropDownContext = useContext<context>(DropDownContext)
     const myOptions: options = dropDownContext.data.triggerStates.filter((value)=>{return value.id===props.id})[0].options
 
     const ref = useRef<HTMLDivElement|null>(null)
@@ -14,6 +15,25 @@ let DropDownMenuWrapper = (props: {id: number})=>{
     const [xPosition, setXPosition] = useState<"left"|"right">("left")
     const [yPosition, setYPosition] = useState<"top"|"bottom">("top")
 
+    useEffect(()=>{
+
+        let element = ref.current;
+        if(!element)
+            return;
+        let boundReact:DOMRect | ClientRect = element.getBoundingClientRect()
+        let xCenter = boundReact.left+boundReact.width
+        let yCenter = boundReact.top+boundReact.height+triggerSize
+
+        if (xCenter>window.innerWidth/2)
+            setXPosition("left")
+        else
+            setXPosition("right")
+
+        if (yCenter<window.innerHeight/2)
+            setYPosition("bottom")
+        else
+            setYPosition("top")
+    }, [])
 
     useEffect(()=>{
         setTimeout(()=>{

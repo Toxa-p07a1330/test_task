@@ -23,10 +23,25 @@ let Trigger = (props: {id: number})=>{
         })
         dropDownContext.setData(data)
     }
+    const hoverHandler = (id: number)=>{
+        let data = deepClone(dropDownContext.data);
+        data.triggerStates = data.triggerStates.map((value: triggerState)=>{
+            if (value.id===id){
+                value.isDdOpened = true
+                return value;
+            }
+            else {
+                value.isDdOpened = false
+                return value;
+            }
+        })
+        dropDownContext.setData(data)
+    }
     const triggerInfo = dropDownContext.data.triggerStates.filter((value)=>{return value.id===props.id})[0];
     return <>
         <div className={"trigger"}>
-            <div className={"click_catcher"} onClick={(e)=>{clickHandler(props.id)}}/>
+            <div className={"click_catcher"} onClick={(e)=>{clickHandler(props.id)}}
+                 onMouseEnter={()=>{hoverHandler(props.id)}}/>
             {triggerInfo.isDdOpened && <DropDownMenuWrapper id={props.id}/>}
         </div>
     </>

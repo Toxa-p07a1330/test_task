@@ -3,9 +3,9 @@ import "../assets/styles/style.css"
 import Trigger from "../components/Trigger";
 import {DropDownContext} from "../context/DropDownContext";
 import {closeAllDropdowns} from "../utils/utils";
-import {triggerState} from "../types";
+import {context, triggerState} from "../types";
 let Home = ()=>{
-    const dropDownContext = useContext(DropDownContext)
+    const dropDownContext = useContext<context>(DropDownContext)
 
     document.addEventListener("click", (e: MouseEvent)=>{
         let isTriggerChild = false
